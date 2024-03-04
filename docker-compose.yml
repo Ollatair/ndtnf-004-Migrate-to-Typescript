@@ -1,0 +1,51 @@
+version: "4"
+
+services:
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - 27017:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+    volumes:
+      - ./data/mongo:/data/db
+
+  counterstorage:
+    image: redis
+    volumes:
+      - ./data:/data
+
+  counterapp:
+    build: ./counterapp
+    restart: always
+    ports: 
+      - 3002:3002
+    environment:
+      - PORTS=3002
+      - REDIS_URL=redis://counterstorage
+    volumes:
+      - /app/node_modules
+      - ./counterapp:/app
+    depends_on:
+      - counterstorage
+  
+  bookapp:
+    build: ./bookapp
+    command: npm run dev
+    restart: always
+    ports: 
+      - 3000:3000
+    environment:
+      - PORTS=3000
+      - CNT_PORT=3002
+      - REDIS_URL=redis://counterstorage
+      - DB_URL=mongodb://root:example@mongo:27017
+    volumes:
+      - /app/node_modules
+      - ./bookapp:/app
+    depends_on:
+      - counterapp
+      - mongo
+
