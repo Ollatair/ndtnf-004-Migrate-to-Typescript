@@ -1,5 +1,5 @@
 {
-  "name": "ndtnf-003",
+  "name": "ndtnf-004",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -9,7 +9,7 @@
     "eslint:dump": "npx eslint --print-config ./.eslintrc.json",
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
-    "dev": "nodemon index.js"
+    "dev": "nodemon ./src/index.js"
   },
   "author": "",
   "license": "ISC",
