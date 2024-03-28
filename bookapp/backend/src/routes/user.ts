@@ -1,19 +1,16 @@
-const router = require('express').Router();
+const express = require('express');
 const passport = require('passport');
-const {
-  renderProfile,
-  renderLogin,
-  userLogin,
-  userLogout,
-  renderRegister,
-  userRegister,
-} = require('../controllers/userPages');
 
-router.get('/me', renderProfile);
-router.get('/login', renderLogin);
-router.post('/login', passport.authenticate('local', { failureRedirect: '/user/login' }), userLogin);
-router.get('/register', renderRegister);
-router.post('/register', userRegister);
-router.get('/logout', userLogout);
+const router = express.Router();
+
+const {
+  userLogin,
+  userRegister,
+  userProfile,
+} = require('../../controllers/userApi');
+
+router.get('/me', userProfile);
+router.post('/login', passport.authenticate('local', { failureMessage: 'Неправильный логин или пароль' }), userLogin);
+router.post('/signup', userRegister);
 
 module.exports = router;

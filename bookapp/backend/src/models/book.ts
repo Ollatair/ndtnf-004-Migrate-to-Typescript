@@ -1,4 +1,5 @@
-const { mongoose } = require('mongoose');
+import mongoose, {Document} from "mongoose";
+import { Book } from "../types/book";
 
 const bookSchema = new mongoose.Schema(
   {
@@ -38,3 +39,7 @@ if (mongoose.models.Book) {
 }
 
 module.exports = mongoose.model('Book', bookSchema);
+
+const Book = mongoose.model<Book & Document>("Book", bookSchema);
+
+export default Book;

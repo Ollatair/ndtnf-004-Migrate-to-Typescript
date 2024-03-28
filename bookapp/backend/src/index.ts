@@ -1,23 +1,20 @@
-const express = require('express');
-const mongoose = require('mongoose');
-const http = require('http');
-const socketIo = require('socket.io');
+import express from 'express';
+import mongoose from 'mongoose';
+import http from 'http';
+import socketIo from 'socket.io';
 
-const session = require('express-session');
-const passport = require('passport');
-const LocalStrategy = require('passport-local').Strategy;
+import session from 'express-session';
+import passport from 'passport';
+import passport-local from 'passport-local';
+const LocalStrategy = passport-local.Strategy;
 
-const indexRouter = require('./routes/index');
-const bookRouter = require('./routes/book');
-const userRouter = require('./routes/user');
+import user from './routes/api/user';
+import book from './routes/api/book';
+import message from './routes/api/message';
+import error404 from './middleware/err-404';
 
-const user = require('./routes/api/user');
-const book = require('./routes/api/book');
-const message = require('./routes/api/message');
-const error404 = require('./middleware/err-404');
-
-const bookController = require('./controllers/booksPages');
-const userController = require('./controllers/userPages');
+import bookController from './controllers/booksApi';
+import userController from './controllers/userApi';
 
 const PORT = process.env.PORT || 3000;
 const DB_URL = process.env.DB_URL || 'localhost';
@@ -48,11 +45,7 @@ app.use(session({
 
 app.use(passport.initialize());
 app.use(passport.session());
-
-app.use('/', indexRouter);
-app.use('/books', bookRouter);
-app.use('/user', userRouter);
-app.use('/public', express.static(`${__dirname}/public`));
+ 
 app.use('/api/user', user);
 app.use('/api/books', book);
 app.use('/api/message', message);

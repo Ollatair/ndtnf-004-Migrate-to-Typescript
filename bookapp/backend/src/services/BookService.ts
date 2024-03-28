@@ -1,11 +1,23 @@
 import "reflect-metadata";
 import { injectable } from "inversify";
-import Book from "../models/Book";
+import { Book as BookType } from "../types/book";
+import Book from "../models/book";
 import { BooksRepository } from "../repositories/BooksRepository";
 
+interface createBookDTO {
+	id: BookType["id"];
+	title: BookType["title"];
+	description: BookType["description"];
+	authors: BookType["authors"];
+	favorite: BookType["favorite"];
+	fileName: BookType["fileName"];
+	filecover: BookType["fileCover"];
+	filebook: BookType["fileBook"];
+}
+
 @injectable()
-export class BookService extends BooksRepository {
-	async createBook(book: typeof Book): Promise<any> {
+export default class BookService extends BooksRepository { 
+	async createBook(book: BookType): Promise<any> {
 		const newBook = new Book(book);
 		await newBook.save();
 		return newBook;
@@ -21,11 +33,12 @@ export class BookService extends BooksRepository {
         return books;
 	}
 
+	async updateBook(bookId: string, book: BookType): Promise<any> {
+		await Book.findByIdAndUpdate(bookId, book);
+	}
+
 	async deleteBook(bookId: string): Promise<any> {
 		await Book.findByIdAndDelete(bookId);
 	}
 
-	async updateBook(bookId: string, book: typeof Book): Promise<any> {
-		await Book.findByIdAndUpdate(bookId, book);
-	}
 }

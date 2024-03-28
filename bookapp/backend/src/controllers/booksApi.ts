@@ -1,7 +1,8 @@
-const BookService = require('../services/BookService');
-const container = require('../containers/container');
+// import { Request, Response } from "express";
+import Books from "../services/BookService";
+import container from "../containers/container";
 
-const repo = container.get(BookService);
+const repo = container.get(Books);
 
 // получить все книги | получаем массив всех книг
 module.exports.getBooks = (req, res) => {

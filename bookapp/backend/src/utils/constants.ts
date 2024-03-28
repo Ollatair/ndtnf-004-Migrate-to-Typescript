@@ -46,4 +46,4 @@ const defaultList = [
   },
 ];
 
-module.exports = defaultList;
+export default defaultList;

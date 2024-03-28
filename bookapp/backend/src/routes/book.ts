@@ -1,23 +1,23 @@
-const router = require('express').Router();
-const fileMulter = require('../middleware/file');
+import express  from "express";
 
-const {
-  renderIndex,
-  renderCreate,
+const fileMulter = require('../../middleware/file');
+
+import {
+  getBooks,
+  getBook,
+  getBookCover,
   createBook,
-  renderView,
-  renderUpdate,
   updateBook,
   deleteBook,
-} = require('../controllers/booksPages');
+} from '../../controllers/booksApi';
 
-router.get('/', renderIndex);
-router.get('/create', renderCreate);
-router.post('/create', fileMulter.single('fileBook'), createBook);
+const apiBooksRouter = express.Router();
 
-router.get('/:id', renderView);
-router.get('/update/:id', renderUpdate);
-router.post('/update/:id', fileMulter.single('fileBook'), updateBook);
-router.post('/delete/:id', deleteBook);
+apiBooksRouter.get('/', getBooks);
+apiBooksRouter.get('/:id', getBook);
+apiBooksRouter.get('/:id/download', getBookCover);
+apiBooksRouter.post('/', fileMulter.single('fileBook'), createBook);
+apiBooksRouter.put('/:id', fileMulter.single('fileBook'), updateBook);
+apiBooksRouter.delete('/:id', deleteBook);
 
 module.exports = router;
