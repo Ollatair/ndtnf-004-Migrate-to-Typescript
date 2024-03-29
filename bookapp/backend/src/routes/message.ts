@@ -5,7 +5,7 @@ const apiMessagesRouter = express.Router();
 const {
   sendMessage,
   getMessage,
-} = require('../../controllers/messageApi');
+} = require('../controllers/messageApi');
 
 apiMessagesRouter.get('/:id', getMessage);
 apiMessagesRouter.post('/', sendMessage);

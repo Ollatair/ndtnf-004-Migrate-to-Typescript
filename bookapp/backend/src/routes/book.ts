@@ -1,6 +1,5 @@
 import express  from "express";
-
-const fileMulter = require('../../middleware/file');
+ 
 
 import {
   getBooks,
@@ -16,8 +15,8 @@ const apiBooksRouter = express.Router();
 apiBooksRouter.get('/', getBooks);
 apiBooksRouter.get('/:id', getBook);
 apiBooksRouter.get('/:id/download', getBookCover);
-apiBooksRouter.post('/', fileMulter.single('fileBook'), createBook);
-apiBooksRouter.put('/:id', fileMulter.single('fileBook'), updateBook);
+apiBooksRouter.post('/', createBook);
+apiBooksRouter.put('/:id', updateBook);
 apiBooksRouter.delete('/:id', deleteBook);
 
 export default apiBooksRouter;

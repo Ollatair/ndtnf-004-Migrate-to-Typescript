@@ -1,7 +1,7 @@
 import express from 'express';
 import mongoose from 'mongoose';
-import http from 'http';
-import socketIo from 'socket.io';
+import 'reflect-metadata';
+
 
 import session from 'express-session';
 import passport from "passport";

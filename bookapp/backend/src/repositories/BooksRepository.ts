@@ -1,5 +1,7 @@
+import { injectable } from "inversify";
 import { Book } from "../types/book";
 
+@injectable() 
 export abstract class BooksRepository {
     abstract getBooks(): Promise<Book[] | null>;
     abstract getBook(id: string): Promise<Book | null>;

@@ -7,7 +7,7 @@ const {
   userLogin,
   userRegister,
   userProfile,
-} = require('../../controllers/userApi');
+} = require('../controllers/userApi');
 
 apiUsersRouter.get('/me', userProfile);
 apiUsersRouter.post('/login', passport.authenticate('local', { failureMessage: 'Неправильный логин или пароль' }), userLogin);
