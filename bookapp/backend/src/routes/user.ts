@@ -3,11 +3,11 @@ import passport from "passport";
 
 const apiUsersRouter = express.Router();
 
-const {
+import  {
   userLogin,
   userRegister,
   userProfile,
-} = require('../controllers/userApi');
+} from '../controllers/userApi';
 
 apiUsersRouter.get('/me', userProfile);
 apiUsersRouter.post('/login', passport.authenticate('local', { failureMessage: 'Неправильный логин или пароль' }), userLogin);

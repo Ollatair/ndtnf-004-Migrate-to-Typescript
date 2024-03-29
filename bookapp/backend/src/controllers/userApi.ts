@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-const User = require('../models/user');
+import { User } from "../models/user";
 
 
 export const serializeUser = (user: any, cb: any) => {

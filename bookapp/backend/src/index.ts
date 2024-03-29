@@ -50,7 +50,7 @@ app.use('/api/message', message);
 async function start() {
   try {
     await mongoose.connect(DB_URL);
-    addBooks;
+    addBooks();
     app.listen(PORT, () => {
       console.log(`Сервер запущен на http://localhost:${PORT}`);
     });
