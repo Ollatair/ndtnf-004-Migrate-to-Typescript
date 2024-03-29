@@ -51,7 +51,7 @@ module.exports.renderView = async (req, res) => {
     const book = await booksAPI.getBookById(id);
     let cnt = 0;
     try {
-      const response = await fetch(`${BASE_URL}:${PORT}/counter/${id}/incr`, {
+      const response = await fetch(`${REDIS_URL}/counter/${id}/incr`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

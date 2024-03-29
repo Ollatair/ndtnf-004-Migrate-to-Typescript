@@ -71,7 +71,6 @@ export const getBookCover = async (req: Request, res: Response) => {
 
 // создать книгу | создаём книгу и возвращаем её же вместе с присвоенным **ID**
 export const createBook = (req: Request, res: Response) => {
-  console.log(req.body);
   const {
     title, description, authors, favorite,
     fileCover, fileName,

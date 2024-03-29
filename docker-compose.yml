@@ -57,9 +57,11 @@ services:
       - 3000:3000
     environment:
       - PORT=3000 
-      - BASE_URL=http://bookapp 
+      - BASE_URL=http://bookapp:3001
+      - REDIS_URL=redis://counterstorage:3002
     volumes:
       - /app/node_modules
       - ./bookapp/frontend:/app
     depends_on:
+      - counterapp
       - bookapp
