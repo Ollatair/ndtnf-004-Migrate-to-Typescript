@@ -1,13 +1,13 @@
-const express = require('express');
+import express  from "express";
 
-const router = express.Router();
+const apiMessagesRouter = express.Router();
 
 const {
   sendMessage,
   getMessage,
 } = require('../../controllers/messageApi');
 
-router.get('/:id', getMessage);
-router.post('/', sendMessage);
+apiMessagesRouter.get('/:id', getMessage);
+apiMessagesRouter.post('/', sendMessage);
 
-module.exports = router;
+export default apiMessagesRouter;

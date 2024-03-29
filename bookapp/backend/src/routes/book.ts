@@ -9,7 +9,7 @@ import {
   createBook,
   updateBook,
   deleteBook,
-} from '../../controllers/booksApi';
+} from '../controllers/booksApi';
 
 const apiBooksRouter = express.Router();
 
@@ -20,4 +20,4 @@ apiBooksRouter.post('/', fileMulter.single('fileBook'), createBook);
 apiBooksRouter.put('/:id', fileMulter.single('fileBook'), updateBook);
 apiBooksRouter.delete('/:id', deleteBook);
 
-module.exports = router;
+export default apiBooksRouter;

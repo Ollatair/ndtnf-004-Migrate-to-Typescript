@@ -1,12 +1,38 @@
+import { Request, Response } from "express";
 const User = require('../models/user');
 
+
+export const serializeUser = (user: any, cb: any) => {
+  cb(null, user);
+};
+
+export const deserializeUser = (user: any, cb: any) => {
+  User.findById(user.id, (err: any, userData: any) => {
+    if (err) { return cb(err); }
+    return cb(null, userData);
+  });
+};
+
+export const verifyUser = async (username: any, password: any, done: any) => {
+  await User.findOne({ username })
+    .then((user: any) => {
+      if (!user) { return done(null, false); }
+      if (user.password === password) {
+        return done(null, user);
+      }
+      return done(null, false);
+    })
+    .catch((e: Error | any) => done(e));
+};
+
+
 // userLogin
-module.exports.userLogin = (req, res) => {
+export const userLogin = (req: Request, res: Response) => {
   res.json(req.user);
 };
 
 // userRegister
-module.exports.userRegister = async (req, res) => {
+export const userRegister = async (req: Request, res: Response) => {
   const {
     displayName, username, password,
   } = req.body;
@@ -29,7 +55,7 @@ module.exports.userRegister = async (req, res) => {
 };
 
 // userProfile
-module.exports.userProfile = (req, res) => {
+export const userProfile = (req: Request, res: Response) => {
   if (!req.isAuthenticated()) {
     return res.status(403).json('Нет доступа');
   }

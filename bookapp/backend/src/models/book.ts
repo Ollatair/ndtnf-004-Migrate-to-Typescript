@@ -34,11 +34,7 @@ const bookSchema = new mongoose.Schema(
   },
   { versionKey: false },
 );
-if (mongoose.models.Book) {
-  delete mongoose.models.Book;
-}
-
-module.exports = mongoose.model('Book', bookSchema);
+ 
 
 const Book = mongoose.model<Book & Document>("Book", bookSchema);
 

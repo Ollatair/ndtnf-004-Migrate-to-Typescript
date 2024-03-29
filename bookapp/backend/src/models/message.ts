@@ -1,6 +1,6 @@
-const { Schema, model } = require('mongoose');
+import mongoose from "mongoose";
 
-const messageSchema = new Schema(
+const messageSchema = new mongoose.Schema(
   {
     bookid: {
       type: String,
@@ -21,4 +21,4 @@ const messageSchema = new Schema(
   },
 );
 
-module.exports = model('message', messageSchema);
+export const Message = mongoose.model("message", messageSchema);

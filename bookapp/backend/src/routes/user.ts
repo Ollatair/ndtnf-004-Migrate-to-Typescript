@@ -1,7 +1,7 @@
-const express = require('express');
-const passport = require('passport');
+import express  from "express";
+import passport from "passport";
 
-const router = express.Router();
+const apiUsersRouter = express.Router();
 
 const {
   userLogin,
@@ -9,8 +9,8 @@ const {
   userProfile,
 } = require('../../controllers/userApi');
 
-router.get('/me', userProfile);
-router.post('/login', passport.authenticate('local', { failureMessage: 'Неправильный логин или пароль' }), userLogin);
-router.post('/signup', userRegister);
+apiUsersRouter.get('/me', userProfile);
+apiUsersRouter.post('/login', passport.authenticate('local', { failureMessage: 'Неправильный логин или пароль' }), userLogin);
+apiUsersRouter.post('/signup', userRegister);
 
-module.exports = router;
+export default apiUsersRouter;
