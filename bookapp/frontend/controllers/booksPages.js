@@ -1,16 +1,21 @@
 const booksAPI = require('../utils/bookApi');
-
+const REDIS_URL = process.env.REDIS_URL || "localhost";
 
 // index — просмотр списка всех книг (вывод заголовков);
-module.exports.renderIndex = (req, res) => {
-  booksAPI.getAllBooks()
-  .then((books) => res.status(200).render('books/index', {
-    title: 'Книги',
-    books,
-  }))
-  .catch((e) => {
-    console.log(e);
-  });
+module.exports.renderIndex = async (req, res) => {
+  
+  try {
+  const books = await booksAPI.getAllBooks(); 
+  if (books) {
+      res.status(200).render('books/index', {
+        title: 'Книги',
+        books,
+      })
+    }
+ 
+  } catch (error) {
+    console.log(error);
+  }
   
 };
 
@@ -64,13 +69,7 @@ module.exports.renderView = async (req, res) => {
     }
     user = req.isAuthenticated() ? req.user : null;
  
-    const messages = await Message.find( {bookid: id} ).sort({ createdAt: -1 })
-    for (const message of messages) {
-      const user = await User.findOne({ username: message.username });
-      if (user) {
-          message.username = user.displayName;
-      }
-  }
+    const messages = [];
   
     res.render('books/view', {
       title: `Книга | ${book.title}`,

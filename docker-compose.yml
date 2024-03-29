@@ -23,7 +23,7 @@ services:
     ports: 
       - 3002:3002
     environment:
-      - PORTS=3002
+      - PORT=3002
       - REDIS_URL=redis://counterstorage
     volumes:
       - /app/node_modules
@@ -39,14 +39,11 @@ services:
       - 3001:3001
     environment:
       - PORT=3001
-      - CNT_PORT=3002
-      - REDIS_URL=redis://counterstorage
       - DB_URL=mongodb://root:example@mongo:27017
     volumes:
       - /app/node_modules
       - ./bookapp/backend:/app
     depends_on:
-      - counterapp
       - mongo
 
   bookapp-front:
@@ -58,7 +55,7 @@ services:
     environment:
       - PORT=3000 
       - BASE_URL=http://bookapp:3001
-      - REDIS_URL=redis://counterstorage:3002
+      - REDIS_URL=http://counterapp:3002
     volumes:
       - /app/node_modules
       - ./bookapp/frontend:/app

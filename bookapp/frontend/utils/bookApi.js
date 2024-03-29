@@ -1,4 +1,4 @@
-const BOOKS_API_URL = require('./constants');
+const { BOOKS_API_URL } = require('./constants');
 
 class BooksApi {
     constructor(baseUrl, headers) {
@@ -19,13 +19,13 @@ class BooksApi {
     }
 
     getAllBooks() {     
-      return this._request(`${this._baseUrl}/books`, { 
+      return this._request(`${this._baseUrl}/api/books`, { 
         headers: this._headers
       });
     }
 
     createBook(data) {
-      return this._request(`${this._baseUrl}/books`, {
+      return this._request(`${this._baseUrl}/api/books`, {
         method: "POST",
         body: JSON.stringify(data), 
         headers: this._headers
@@ -33,13 +33,13 @@ class BooksApi {
   }
 
   getBookById(bookId) {
-      return this._request(`${this._baseUrl}/books/${bookId}`, { 
+      return this._request(`${this._baseUrl}/api/books/${bookId}`, { 
         headers: this._headers
       });
   }
 
   updateBookById(bookId, data) {
-    return this._request(`${this._baseUrl}/books/${bookId}`, {
+    return this._request(`${this._baseUrl}/api/books/${bookId}`, {
       method: "PATCH",
       body: JSON.stringify(data),
       headers: this._headers
@@ -47,7 +47,7 @@ class BooksApi {
   }
 
   deleteBookById(bookId, data) {
-    return this._request(`${this._baseUrl}/books/${bookId}`, {
+    return this._request(`${this._baseUrl}/api/books/${bookId}`, {
       method: "DELETE",
       body: JSON.stringify(data),
       headers: this._headers
@@ -60,7 +60,7 @@ const headers = {
     "Content-Type": "application/json"
 };
    
-const baseUrl = BOOKS_API_URL;
+const baseUrl = BOOKS_API_URL ;
 const bookApi = new BooksApi(baseUrl, headers);
 
 module.exports = bookApi;

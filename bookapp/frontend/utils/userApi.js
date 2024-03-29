@@ -1,4 +1,4 @@
-const USERS_API_URL = require('./constants');
+const { USERS_API_URL } = require('./constants');
 
 class UserApi {
     constructor(baseUrl, headers) {
@@ -19,7 +19,7 @@ class UserApi {
     }
  
     getUserById(userId) {
-        return this._request(`${this._baseUrl}/user/${userId}`, { 
+        return this._request(`${this._baseUrl}/api/user/${userId}`, { 
         headers: this._headers
         });
     }
